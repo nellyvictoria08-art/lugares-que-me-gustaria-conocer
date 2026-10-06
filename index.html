@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares que me gustaría conocer</title>
+</head>
+
+<body>
+    <a href="#contenido-principal">Saltar al contenido principal</a>
+    <header>
+        <h1>Lugares que me gustaría conocer</h1>
+        <p>
+            Viajar es una oportunidad para conocer nuevos lugares, culturas, personas y formas de vida. En esta página
+            quiero compartir algunos de los destinos que me gustaría conocer algún día.
+        </p>
+    </header>
+    <main id="contenido-principal">
+        <section>
+            <h2>París, Francia</h2>
+            <img src="paris.jpg" alt="Vista de la Torre Eiffel en París">
+            <p>
+                París es uno de los lugares que más me gustaría conocer. Me interesa visitar sus lugares históricos,
+                disfrutar de su arquitectura y conocer la famosa Torre Eiffel.
+            </p>
+        </section>
+        <section>
+            <h2>Tokio, Japón</h2>
+            <img src="tokio.jpg" alt="Vista de la ciudad de Tokio en Japón">
+            <p>
+                Tokio me llama la atención porque combina la tecnología moderna con las tradiciones de Japón. También me
+                gustaría conocer su cultura y probar algunos de sus platos típicos.
+            </p>
+        </section>
+        <section>
+            <h2>Nueva York, Estados Unidos</h2>
+            <img src="nueva-york.jpg" alt="Vista de la ciudad de Nueva York">
+            <p>
+                Nueva York es otro destino que me gustaría conocer. Me gustaría visitar lugares famosos, conocer sus
+                grandes edificios y disfrutar de la variedad cultural de la ciudad.
+            </p>
+        </section>
+        <section>
+            <h2>Cosas que me gustaría hacer durante mis viajes</h2>
+            <ul>
+                <li>Conocer lugares históricos y famosos.</li>
+                <li>Probar comidas típicas de otros países.</li>
+                <li>Tomar fotografías de los lugares que visite.</li>
+                <li>Conocer nuevas culturas y tradiciones.</li>
+                <li>Disfrutar de nuevas experiencias.</li>
+            </ul>
+        </section>
+    </main>
+    <section>
+        <p>
+            Para conocer más sobre destinos turísticos, puedes visitar <a href="https://www.unwto.org/" target="_blank"
+                rel="noopener noreferrer"> ONU Turismo </a>.
+        </p>
+    </section>
+    <footer>
+        <p>Proyecto Final de HTML5 - Lugares que me gustaría conocer</p>
+    </footer>
+<script>
+    const coursera_getParentTargetDomain = function() {
+      if (location.ancestorOrigins && location.ancestorOrigins[0]) {
+        return location.ancestorOrigins[0];
+      }
+      return "https://www.coursera.org";
+    };
+    </script>
+<script>
+    if (window.parent !== window) {
+      (function() {
+        var historyWrapper = function(functionType) {
+          var whichFunc = history[functionType];
+          return function() {
+            var response = whichFunc.apply(this, arguments);
+            var eventRes = new Event(functionType);
+            eventRes.arguments = arguments;
+            window.dispatchEvent(eventRes);
+            return response;
+          };
+        };
+        history.pushState = historyWrapper("pushState");
+        history.replaceState = historyWrapper("replaceState");
+        const sendInnerFrameUrl = function() {
+          window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
+        };
+        window.addEventListener("pushState",    sendInnerFrameUrl);
+        window.addEventListener("replaceState", sendInnerFrameUrl);
+        window.addEventListener("popstate",     sendInnerFrameUrl);
+        window.addEventListener("hashchange",   sendInnerFrameUrl);
+      })();
+    }
+    </script>
+<script>
+    if (window.parent !== window) {
+      window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
+    }
+    </script>
+<script>
+    if (window.parent !== window) {
+      (function() {
+        function throttle(callback, limit) {
+          var waiting = false;                      // Initially, we're not waiting
+          return function () {                      // We return a throttled function
+            if (!waiting) {                         // If we're not waiting
+              callback.apply(this, arguments);      // Execute users function
+              waiting = true;                       // Prevent future invocations
+              setTimeout(function () {              // After a period of time
+                  waiting = false;                  // And allow future invocations
+              }, limit);
+            }
+          }
+        }
+
+        const notify = (userActionType) => {
+          window.parent.postMessage({'isActive': true, 'fromInnerFrame': true, 'userActionType': userActionType}, coursera_getParentTargetDomain());
+        };
+
+        const throttledNotifyKeyPress = throttle(() => notify('key_press'), 10000);
+        const throttledNotifyMouseMovement = throttle(() => notify('mouse_movement'), 10000);
+        const throttledNotifyClick = throttle(() => notify('key_press'), 10000);
+
+        window.addEventListener('keydown', throttledNotifyKeyPress);
+        window.addEventListener('mousemove', throttledNotifyMouseMovement);
+        window.addEventListener('click', throttledNotifyClick);
+      })();
+    }
+    </script></body>
+
+</html>
